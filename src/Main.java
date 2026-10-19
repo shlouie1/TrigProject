@@ -48,6 +48,8 @@ public class Main {
           return (Double)null;
      }
 
+
+     //
      public static double sinValue (double oppositeSideLen, double hypotSideLen) {
           double sinValue = (oppositeSideLen / hypotSideLen);
           return sinValue;
@@ -63,6 +65,8 @@ public class Main {
           return tanValue;
      }
 
+     //not sure how these are useful right now as they're unused and just wrappers
+     //is this too much voodoo?
      public static double arcSin (double angle) {
           double arcSin = Math.asin(angle);
           return arcSin;
@@ -106,7 +110,7 @@ public class Main {
           return result; 
      }
 
-     //returns value of angle C from Law of Cosines
+     //returns value of angle C from Law of Cosines SSS value
      public static double lawOfCosinesSSSAngleC (double sideALen, double sideBLen, double sideCLen) {
           //SSS scenario, finds missing angle value
           double numerator = 0;
@@ -120,29 +124,55 @@ public class Main {
           return result;
      }
 
-     public static double lawOfCosinesSASSideA (double sideBLen, double sideCLen, double degreeValue) {
-          double sideA = (Math.pow(sideBLen, 2) + Math.pow(sideCLen, 2)) - (2 * (sideBLen * sideCLen) * cosValue(degreeValue));
+     //converts radians to degrees, useful later
+     public static double radToDegree (double radians) {
+          double degrees = radians * (180 / Math.PI);
+          return degrees;
+     }
+
+     //converts degrees to radians
+     // useful because Math.<TRIG_FUNCTION_NAME> passes arguments as radians (instead of degrees)
+     public static double degreesToRad (double degrees) {
+          double radians = degrees * (Math.PI / 180);
+          return radians;
+     }
+
+
+     //law of cosies for different sides of SAS
+     //maybe condense into one method in the future, but this does make things simpler
+     public static double lawOfCosinesSASSideA (double sideBLen, double degreeValue, double sideCLen) {
+          double radians = degreesToRad(degreeValue);
+          double sideA = (Math.pow(sideBLen, 2) + Math.pow(sideCLen, 2)) - (2 * (sideBLen * sideCLen) * Math.cos(radians));
           sideA = Math.sqrt(sideA);
+
           return sideA;
      }
 
-     public static double lawOfCosinesSASSideB (double sideALen, double sideCLen, double degreeValue) {
-          double sideB = (Math.pow(sideALen, 2) + Math.pow(sideCLen, 2)) - (2 * (sideALen * sideCLen) * cosValue(degreeValue));
+     public static double lawOfCosinesSASSideB (double sideALen, double degreeValue, double sideCLen) {
+          double radians = degreesToRad(degreeValue);
+          double sideB = (Math.pow(sideALen, 2) + Math.pow(sideCLen, 2)) - (2 * (sideALen * sideCLen) * Math.cos(radians));
           sideB = Math.sqrt(sideB);
+
           return sideB;
      }
 
-     public static double lawOfCosinesSASSideC (double sideALen, double sideBLen, double degreeValue) {
-          double sideC = (Math.pow(sideALen, 2) + Math.pow(sideBLen, 2)) - (2 * (sideALen * sideBLen) * cosValue(degreeValue));
+     public static double lawOfCosinesSASSideC (double sideALen, double degreeValue, double sideBLen) {
+          double radians = degreesToRad(degreeValue);
+          double sideC = (Math.pow(sideALen, 2) + Math.pow(sideBLen, 2)) - (2 * (sideALen * sideBLen) * Math.cos(radians));
           sideC = Math.sqrt(sideC);
+
           return sideC;
      }
 
-     public static double lawOfSinesASASideA (double angleA, double otherAngle) {
-
+     public static double lawOfSinesASASideA (double angleA, double sideX, double angleX) {
+          double radiansAngleA = degreesToRad(angleA);
+          double radiansAngleX = degreesToRad(angleX);
+          double sideALen = Math.sin(radiansAngleA) * (sideX / Math.sin(radiansAngleX));
+          
+          return sideALen;
      }
 
      public static void main (String[] args) {
-          System.out.println(rightTriangle(3, 4, 0));
+          System.out.println(lawOfSinesASASideA(120, 15, 30));      
      }    
 }
