@@ -13,25 +13,39 @@ public class BasicMethods {
           return radians;
      }
 
-     public static double triangleMissingAngle (double angleA, double angleB, double angleC) {
+     //returns result of missing angle  
+     //angleA and angleB parameters refer to the two known angles, regardless of 'true' name
+     public static double triangleMissingAngle (double angleA, double angleB) {
           double totalTriangleDegrees = 180;
+          double angleC = totalTriangleDegrees - angleA - angleB;
 
-          if (angleA == 0) {
-               angleA = totalTriangleDegrees - (angleB + angleC);
-               return angleA;
-          }
-
-          else if (angleB == 0) {
-               angleB = totalTriangleDegrees - (angleA + angleC);
-               return angleB;
-          }
-
-          else if (angleC == 0) {
-               angleC = totalTriangleDegrees - angleA - angleB;
-               return angleC;
-          }
-          return (Double)null;
+          return angleC;
      }
+
+     //returns result of missing side length of a right triangle
+     //sides A and B refer to the legs, side C refers to they hypotenuse
+     public static double rightTriangleMissingSideLength (double sideALen, double sideBLen, double sideCLen) {
+          double sqrtVal = 0;
+
+          if (sideALen == 0 || sideBLen == 0) {
+               double val1 = Math.pow((sideCLen), 2);
+
+               double orValue = (sideALen == 0) ? sideBLen : sideALen; 
+               double val2 = Math.pow((orValue), 2);
+
+               double sumValue = val1 - val2;
+               sqrtVal = Math.sqrt(sumValue);
+          }
+          else {
+               double val1 = Math.pow((sideALen), 2);
+               double val2 = Math.pow((sideBLen), 2);
+
+               double sumValue = val1 + val2;
+               sqrtVal = Math.sqrt(sumValue);
+          }
+          return sqrtVal; 
+     }
+
 
 
      //Basic sin, cos, and tan values, unused now

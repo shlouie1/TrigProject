@@ -2,6 +2,7 @@ import java.lang.Math;
 
 public class LawOfSines { 
 
+     //for the ASA methods Side<(A/B/C> refer to the side length that will be returned
      public static double lawOfSinesASASideA (double angleA, double sideX, double angleX) {
           double radiansAngleA = BasicMethods.degreesToRad(angleA);
           double radiansAngleX = BasicMethods.degreesToRad(angleX);
@@ -33,32 +34,32 @@ public class LawOfSines {
           double radiansAngleX = BasicMethods.degreesToRad(angleX);
           double radiansAngleA = BasicMethods.degreesToRad(angleA);
 
-          double sideX = (Math.sin(radiansAngleX) * sideA) / (Math.sin(radiansAngleA));
+          double sideXLen = (Math.sin(radiansAngleX) * sideA) / (Math.sin(radiansAngleA));
 
-          return sideX;
+          return sideXLen;
      }
 
      public static double lawOfSinesAASSideB (double angleB, double angleX, double sideB) {
           double radiansAngleX = BasicMethods.degreesToRad(angleX);
           double radiansAngleB = BasicMethods.degreesToRad(angleB);
 
-          double sideX = (Math.sin(radiansAngleX) * sideB) / (Math.sin(radiansAngleB));
+          double sideXLen = (Math.sin(radiansAngleX) * sideB) / (Math.sin(radiansAngleB));
 
-          return sideX;
+          return sideXLen;
      }
 
       public static double lawOfSinesAASSideC (double angleC, double angleX, double sideC) {
           double radiansAngleX = BasicMethods.degreesToRad(angleX);
           double radiansAngleC = BasicMethods.degreesToRad(angleC);
 
-          double sideX = (Math.sin(radiansAngleX) * sideC) / (Math.sin(radiansAngleC));
+          double sideXLen = (Math.sin(radiansAngleX) * sideC) / (Math.sin(radiansAngleC));
 
-          return sideX;
+          return sideXLen;
      }
 
      //This method's naming convention imply that A refers the corresponding side & angle that is known
      //e.g. if you know side B and angle B, you will pass them in as sideA and angleB, respectively
-     public static double lawOfSinesSSASideA (double sideA, double sideB, double angleA) {
+     public static int lawOfSinesSSASideCLen (double sideA, double sideB, double angleA) {
           double radiansAngleA = BasicMethods.degreesToRad(angleA);
           int possibleTriangleCount = 0;
 
@@ -68,7 +69,7 @@ public class LawOfSines {
           double angleB = BasicMethods.arcSin(sinOfB);
 
           if (sinOfB > 1) {
-               return 0;
+               return possibleTriangleCount;
           }
           else if (sinOfB == 1) {
                possibleTriangleCount = 1;
@@ -77,9 +78,21 @@ public class LawOfSines {
                possibleTriangleCount = 2;
           }
 
-          if (possibleTriangleCount == 1) {
-               double angleC = BasicMethods.triangleMissingAngle(angleA, angleB, 0);
+          if (possibleTriangleCount == 0) {
+               System.out.println("No possible triangles");
           }
-          return 190;
+          else if (possibleTriangleCount == 1) {
+               System.out.println("One triangle possible!");
+               if (BasicMethods.triangleMissingAngle(angleA, angleB) > 0) {
+                    double angleC = BasicMethods.triangleMissingAngle(angleA, angleB);
+                    double sideCLen = (Math.abs(Math.sin(angleC) * sideA) /Math.sin(angleA));
+                    return sideCLen;
+               }
+          }
+          else {
+               System.out.println("Two triangles possible");
+          }
      }
+
+
 }
