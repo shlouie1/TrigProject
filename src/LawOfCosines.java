@@ -3,7 +3,7 @@ import java.lang.Math;
 public class LawOfCosines {
 
 	//returns value of angle A from Law of Cosines
-     public static double lawOfCosinesSSSAngleA (double sideALen, double sideBLen, double sideCLen) {
+     public static double lawOCos_SSS_AngleA (double sideALen, double sideBLen, double sideCLen) {
           //SSS scenario, finds missing angle value
           double numerator = Math.pow(sideBLen, 2) + Math.pow(sideALen, 2) - Math.pow(sideCLen, 2);
           double denominator = 2 * sideALen * sideBLen;
@@ -13,7 +13,7 @@ public class LawOfCosines {
      }
 
      //returns value of angle B from Law of Cosines
-     public static double lawOfCosinesSSSAngleB (double sideALen, double sideBLen, double sideCLen) {
+     public static double lawOCos_SSS_AngleB (double sideALen, double sideBLen, double sideCLen) {
           //SSS scenario, finds missing angle value
 
           double numerator = Math.pow(sideALen, 2) + Math.pow(sideCLen, 2) - Math.pow(sideBLen, 2);
@@ -24,7 +24,7 @@ public class LawOfCosines {
      }
 
      //returns value of angle C from Law of Cosines SSS value
-     public static double lawOfCosinesSSSAngleC (double sideALen, double sideBLen, double sideCLen) {
+     public static double lawOCos_SSS_AngleC (double sideALen, double sideBLen, double sideCLen) {
           //SSS scenario, finds missing angle value
           double numerator = Math.pow(sideALen, 2) + Math.pow(sideBLen, 2) - Math.pow(sideCLen, 2);
           double denominator = 2 * sideALen * sideBLen;
@@ -35,7 +35,7 @@ public class LawOfCosines {
 
      //law of cosies for different sides of SAS
      //maybe condense into one method in the future, but this does make things simpler
-     public static double lawOfCosinesSASSideA (double sideBLen, double degreeValue, double sideCLen) {
+     public static double lawOCos_SAS_SideA (double sideBLen, double degreeValue, double sideCLen) {
           double radians = BasicMethods.degreesToRad(degreeValue);
           double sideA = (Math.pow(sideBLen, 2) + Math.pow(sideCLen, 2)) - (2 * (sideBLen * sideCLen) * Math.cos(radians));
           sideA = Math.sqrt(sideA);
@@ -43,7 +43,7 @@ public class LawOfCosines {
           return sideA;
      }
 
-     public static double lawOfCosinesSASSideB (double sideALen, double degreeValue, double sideCLen) {
+     public static double lawOCos_SAS_SideB (double sideALen, double degreeValue, double sideCLen) {
           double radians = BasicMethods.degreesToRad(degreeValue);
           double sideB = (Math.pow(sideALen, 2) + Math.pow(sideCLen, 2)) - (2 * (sideALen * sideCLen) * Math.cos(radians));
           sideB = Math.sqrt(sideB);
@@ -51,7 +51,7 @@ public class LawOfCosines {
           return sideB;
      }
 
-     public static double lawOfCosinesSASSideC (double sideALen, double degreeValue, double sideBLen) {
+     public static double lawOCos_SAS_SideC (double sideALen, double degreeValue, double sideBLen) {
           double radians = BasicMethods.degreesToRad(degreeValue);
           double sideC = (Math.pow(sideALen, 2) + Math.pow(sideBLen, 2)) - (2 * (sideALen * sideBLen) * Math.cos(radians));
           sideC = Math.sqrt(sideC);
